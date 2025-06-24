@@ -1,10 +1,21 @@
+"""
+Этот модуль отвечает за определение форм для обработки пользовательского ввода
+в приложении.
+"""
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Product
 
 
 class ProductModelForm(forms.ModelForm):
+    """
+       Форма для создания и редактирования объектов модели продукта.
+       """
     class Meta:
+        """
+           Вложенный класс Meta для настройки формы ProductModelForm.
+           """
+
         model = Product
         fields = ['name', 'description', 'price', 'quantity', 'category']
         labels = {
@@ -15,7 +26,8 @@ class ProductModelForm(forms.ModelForm):
             'category': 'Категория',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите название'}),
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Введите название'}),
             'description': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Введите состав'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -56,8 +68,3 @@ def clean_category(self):
     if not category:
         raise ValidationError('Это поле обязательно для заполнения.')
     return category
-
-
-
-
-

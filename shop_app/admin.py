@@ -1,3 +1,6 @@
+"""
+Этот модуль отвечает за настройку административного интерфейса приложения.
+"""
 from django.contrib import admin
 from .models import Product, Category
 
@@ -18,6 +21,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     @admin.action(description='Изменить цену')
     def change_price(self, request, queryset):
+        """
+        Изменяет цену для выбранных объектов в queryset.
+        """
         for product in queryset:
             product.price += 100
             product.price -= 100
@@ -27,6 +33,9 @@ class ProductAdmin(admin.ModelAdmin):
     @admin.action(description='Опубликовать выбранный товар')
 
     def publish_product(self, request, queryset):
+        """
+         Публикует выбранные продукты из queryset.
+         """
         queryset.update(is_published=True)
         self.message_user(request, "Выбранные товары успешно опубликованы.")
 

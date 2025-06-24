@@ -1,3 +1,6 @@
+"""
+Этот модуль отвечает за маршрутизацию URL в приложении.
+"""
 from django.urls import path
 from . import views
 
@@ -10,7 +13,3 @@ urlpatterns = [
     path('products/<int:pk>/delete/', views.ProductDeleteView.as_view(), name='delete_product'),
 
 ]
-
-
-
-
